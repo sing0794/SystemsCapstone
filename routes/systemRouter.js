@@ -11,7 +11,6 @@ systemRouter.use(bodyParser.json());
 systemRouter.route('/')
 .get(function (req, res, next) {
     Systems.find(req.query)
-        .populate('comments.postedBy')
         .exec(function (err, system) {
         if (err) next(err.concat('systems router find'));
         res.json(system);
@@ -41,7 +40,6 @@ systemRouter.route('/')
 systemRouter.route('/:systemId')
 .get(function (req, res, next) {
     Systems.findById(req.params.systemId)
-        .populate('comments.postedBy')
         .exec(function (err, system) {
         if (err) next(err);
         res.json(system);
